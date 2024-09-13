@@ -12,3 +12,5 @@
 ## 1주차 과제: 21기 코테 자바로 구현하기
 
 ### 실행 화면
+![1](https://github.com/user-attachments/assets/6ea4c8ef-e9fb-499f-a191-5554c981cf78)
+![2](https://github.com/user-attachments/assets/660582f3-205b-4c17-b755-67773bbe5dab)
