@@ -3,6 +3,7 @@ package com.example.week2.repository;
 import com.example.week2.repository.domain.Topic;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
+import org.springframework.util.Assert;
 
 import java.util.HashMap;
 import java.util.List;
@@ -27,11 +28,18 @@ public class TopicRepository {
     }
 
     public Optional<Topic> findById(Long id){
+        Assert.notNull(id, "ID MUST NOT BE NULL");
         return Optional.of(topicMap.get(id));
     }
 
     //전체조회
     public List<Topic> findAll(){
         return topicMap.values().stream().toList();
+    }
+
+    //삭제
+    public void deleteById(Long id){
+        Assert.notNull(id, "ID MUST NOT BE NULL");
+        topicMap.remove(id);
     }
 }
