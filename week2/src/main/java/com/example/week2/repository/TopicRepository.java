@@ -5,7 +5,9 @@ import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
@@ -19,7 +21,12 @@ public class TopicRepository {
         topicMap.put(id, topic);
     }
 
-    public Topic findById(Long id) {
-        return topicMap.get(id);
+    public Optional<Topic> findById(Long id){
+        return Optional.of(topicMap.get(id));
+    }
+
+    //전체조회
+    public List<Topic> findAll(){
+        return topicMap.values().stream().toList();
     }
 }
