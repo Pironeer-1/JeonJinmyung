@@ -50,4 +50,11 @@ public class SubCommentController {
         subcommentService.deleteById(id);
         return ResponseEntity.ok().build();
     }
+
+    @GetMapping
+    @Operation(summary = "대댓글 전체 조회")
+    public ResponseEntity<List<SubCommentResponse>> readAll() {
+        List<SubCommentResponse> responses = subcommentService.findAllSubComments();
+        return ResponseEntity.ok(responses);
+    }
 }

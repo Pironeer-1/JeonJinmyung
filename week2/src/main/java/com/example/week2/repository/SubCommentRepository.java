@@ -5,10 +5,7 @@ import com.example.week2.repository.domain.Topic;
 import org.springframework.stereotype.Repository;
 import org.springframework.util.Assert;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Repository
@@ -39,5 +36,10 @@ public class SubCommentRepository {
 
         SubComment subcomment = subcommentMap.get(subcommentId);
         subcommentMap.remove(subcommentId);
+    }
+
+    //전체조회
+    public List<SubComment> findAll() {
+        return subcommentMap.values().stream().toList();
     }
 }

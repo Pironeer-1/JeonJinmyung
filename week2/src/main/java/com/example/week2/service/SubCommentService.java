@@ -45,4 +45,12 @@ public class SubCommentService {
     public void deleteById(Long id){
         subcommentRepository.deleteById(id);
     }
+
+    //전체조회
+    public List<SubCommentResponse> findAllSubComments() {
+        List<SubComment> subComments = subcommentRepository.findAll();
+        return subComments.stream()
+                .map(SubCommentResponse::of)
+                .toList();
+    }
 }
