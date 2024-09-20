@@ -1,6 +1,7 @@
 package com.example.week2.controller;
 
 import com.example.week2.dto.request.TopicCreateRequest;
+import com.example.week2.dto.request.TopicUpdateRequest;
 import com.example.week2.dto.response.TopicResponse;
 import com.example.week2.service.TopicService;
 import lombok.RequiredArgsConstructor;
@@ -32,5 +33,12 @@ public class TopicController {
     public ResponseEntity<List<TopicResponse>> readAll(){
         List<TopicResponse> responses = topicService.findAll();
         return ResponseEntity.ok().body(responses);
+    }
+
+    //수정
+    @PatchMapping
+    public ResponseEntity<TopicResponse> update(@RequestBody TopicUpdateRequest request) {
+        TopicResponse response = topicService.update(request);
+        return ResponseEntity.ok().body(response);
     }
 }
