@@ -3,6 +3,7 @@ package com.example.week2.service;
 import com.example.week2.dto.request.TopicCreateRequest;
 import com.example.week2.dto.request.TopicUpdateRequest;
 import com.example.week2.dto.response.TopicResponse;
+import com.example.week2.mapper.TopicMapper;
 import com.example.week2.repository.TopicRepository;
 import com.example.week2.repository.domain.Topic;
 import lombok.RequiredArgsConstructor;
@@ -17,13 +18,7 @@ public class TopicService {
     private final TopicRepository topicRepository;
 
     public void save(TopicCreateRequest request){
-        LocalDateTime now = LocalDateTime.now();
-        Topic topic = Topic.builder()
-                .title(request.title())
-                .content(request.content())
-                .createdAt(now)
-                .updatedAt(now)
-                .build();
+        Topic topic = TopicMapper.from(request);
         topicRepository.save(topic);
     }
 
