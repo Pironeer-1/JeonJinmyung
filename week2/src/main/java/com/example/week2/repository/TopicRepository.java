@@ -8,10 +8,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 
-@Service
+@Repository
 public class TopicRepository {
-    private final AtomicLong topicIdxGenerator = new AtomicLong();
-    private final Map<Long, Topic> topicMap = new HashMap<>();
+    private final AtomicLong topicIdxGenerator = new AtomicLong(0);
+    private final Map<Long, Topic> topicMap = new HashMap<Long, Topic>();
 
     public void save(Topic topic) {
         Long id = topicIdxGenerator.incrementAndGet();
@@ -19,7 +19,7 @@ public class TopicRepository {
         topicMap.put(id, topic);
     }
 
-    public Topic findById(long id) {
+    public Topic findById(Long id) {
         return topicMap.get(id);
     }
 }

@@ -9,16 +9,17 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
+@RequestMapping("/api/topic")
 
 public class TopicController {
     private final TopicService topicService;
-    @PostMapping("/api/topic")
+    @PostMapping
     public ResponseEntity<?> create(@RequestBody TopicCreateRequest request) {
         topicService.save(request);
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping("/api/topic/{topicId}")
+    @GetMapping("/{topicId}")
     public ResponseEntity<TopicResponse> read(@PathVariable("topicId") Long id){
         TopicResponse response = topicService.findById(id);
         return ResponseEntity.ok().body(response);
