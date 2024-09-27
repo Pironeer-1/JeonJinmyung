@@ -37,4 +37,18 @@ public class MemberService {
 
         return ResponseService.getSingleResult(jwtTokenSet);
     }
+
+    public SingleResult<JwtTokenSet> login(MemberLoginReq req) {
+        Member member = memberRepository.findByMemberId(req.memberId())
+                .orElseThrow(() -> new CustomException(ErrorCode.USER_NOT_EXIST));
+
+        // 비밀번호 검증
+        if (!member.getPassword().equals(req.password())) {
+            throw new CustomException(ErrorCode.USER_WRONG_PASSWORD);
+        }
+
+        JwtTokenSet jwtTokenSet = authService.generateToken(member.getId());
+
+        return ResponseService.getSingleResult(jwtTokenSet);
+    }
 }

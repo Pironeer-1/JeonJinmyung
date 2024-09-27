@@ -29,4 +29,11 @@ public class MemberController {
         SingleResult<JwtTokenSet> result = memberService.register(req);
         return SuccessResponse.ok(result);
     }
+
+    @PostMapping("/login")
+    @Operation(summary = "로그인")
+    public SuccessResponse<SingleResult<JwtTokenSet>> login(@Valid @RequestBody MemberLoginReq req) {
+        SingleResult<JwtTokenSet> result = memberService.login(req);
+        return SuccessResponse.ok(result);
+    }
 }
