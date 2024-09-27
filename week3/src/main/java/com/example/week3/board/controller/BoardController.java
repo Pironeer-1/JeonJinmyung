@@ -1,0 +1,40 @@
+package com.example.week3.board.controller;
+
+import com.example.week3.board.dto.request.BoardCreateRequest;
+import com.example.week3.board.dto.response.BoardResponse;
+import com.example.week3.board.service.BoardService;
+import com.example.week3.global.dto.response.SuccessResponse;
+import com.example.week3.global.dto.response.result.SingleResult;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+@RestController
+@RequiredArgsConstructor
+@Tag(name = "게시물(Board)")
+@RequestMapping("/api/board")
+public class BoardController {
+    private final BoardService boardService;
+
+    @PostMapping
+    @Operation(summary = "게시물 작성")
+    public SuccessResponse<SingleResult<Long>> create(
+            @RequestParam("id") String userId,
+            @Valid @RequestBody BoardCreateRequest request
+    ) {
+        System.out.println(userId);
+
+        SingleResult<Long> save = boardService.save(request);
+        return SuccessResponse.ok(save);
+    }
+
+    @GetMapping("/{boardId}")
+    @Operation(summary = "게시물 단건 조회")
+    public SuccessResponse<SingleResult<BoardResponse>> read(@PathVariable("boardId") Long id) {
+        SingleResult<BoardResponse> result = boardService.findById(id);
+        return SuccessResponse.ok(result);
+    }
+}
