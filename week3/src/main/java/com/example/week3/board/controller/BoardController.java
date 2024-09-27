@@ -1,6 +1,7 @@
 package com.example.week3.board.controller;
 
 import com.example.week3.board.dto.request.BoardCreateRequest;
+import com.example.week3.board.dto.request.BoardUpdateRequest;
 import com.example.week3.board.dto.response.BoardResponse;
 import com.example.week3.board.service.BoardService;
 import com.example.week3.global.dto.response.SuccessResponse;
@@ -44,5 +45,19 @@ public class BoardController {
     public SuccessResponse<ListResult<BoardResponse>> readAll() {
         ListResult<BoardResponse> result = boardService.findAll();
         return SuccessResponse.ok(result);
+    }
+
+    @PutMapping
+    @Operation(summary = "게시물 수정")
+    public ResponseEntity<BoardResponse> update(@Valid @RequestBody BoardUpdateRequest request) {
+        BoardResponse response = boardService.update(request);
+        return ResponseEntity.ok().body(response);
+    }
+
+    @DeleteMapping("/{boardId}")
+    @Operation(summary = "게시물 삭제")
+    public ResponseEntity<Long> remove(@PathVariable("boardId") Long id) {
+        Long deletedId = boardService.deleteById(id);
+        return ResponseEntity.ok().body(deletedId);
     }
 }

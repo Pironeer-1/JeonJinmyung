@@ -37,4 +37,11 @@ public class BoardMemoryRepository implements BoardRepository {
         return boardMap.values().stream().toList();
     }
 
+    @Override
+    public Long deleteById(Long id) {
+        Assert.notNull(id, "ID MUST NOT BE NULL");
+        boardMap.remove(id);
+        return id;
+    }
+
 }

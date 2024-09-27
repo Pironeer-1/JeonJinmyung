@@ -1,6 +1,7 @@
 package com.example.week3.board.service;
 
 import com.example.week3.board.dto.request.BoardCreateRequest;
+import com.example.week3.board.dto.request.BoardUpdateRequest;
 import com.example.week3.board.dto.response.BoardResponse;
 import com.example.week3.board.entity.Board;
 import com.example.week3.board.mapper.BoardMapper;
@@ -36,6 +37,18 @@ public class BoardService {
         List<Board> topics = boardRepository.findAll();
         List<BoardResponse> list = topics.stream().map(BoardResponse::of).toList();
         return ResponseService.getListResult(list);
+    }
+
+    public BoardResponse update(BoardUpdateRequest request) {
+        Board board = boardRepository.findById(request.id())
+                .orElseThrow(() -> new RuntimeException("TOPIC NOT FOUND"));
+        boardRepository.save(board.update(request));
+        return BoardResponse.of(board);
+    }
+
+    public Long deleteById(Long id) {
+        Long deleteId = boardRepository.deleteById(id);
+        return deleteId;
     }
 
 }
