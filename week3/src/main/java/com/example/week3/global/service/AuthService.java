@@ -1,5 +1,6 @@
 package com.example.week3.global.service;
 
+import com.example.week3.global.dto.response.JwtTokenSet;
 import com.example.week3.global.jwt.JwtUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;

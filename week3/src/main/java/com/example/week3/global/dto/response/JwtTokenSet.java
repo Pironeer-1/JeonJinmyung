@@ -12,5 +12,5 @@ public class JwtTokenSet {
     private String grantType;
 
     @Schema(description = "토큰", example = "eyJhbGciOiJIUzI1NiJ9.eyJpZCI6MSwiaWF0IjoxNzI2NjUyNDM0LCJleHAiOjE3MjY2NTMwMzR9.g3U4UWTsqxEWipOzZT6v-9tpUkVjuPNhD2AkB5nAiFM")
-    private String tokne;
+    private String token;
 }
