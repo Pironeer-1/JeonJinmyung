@@ -4,6 +4,7 @@ import com.example.week3.board.dto.request.BoardCreateRequest;
 import com.example.week3.board.dto.response.BoardResponse;
 import com.example.week3.board.service.BoardService;
 import com.example.week3.global.dto.response.SuccessResponse;
+import com.example.week3.global.dto.response.result.ListResult;
 import com.example.week3.global.dto.response.result.SingleResult;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -35,6 +36,13 @@ public class BoardController {
     @Operation(summary = "게시물 단건 조회")
     public SuccessResponse<SingleResult<BoardResponse>> read(@PathVariable("boardId") Long id) {
         SingleResult<BoardResponse> result = boardService.findById(id);
+        return SuccessResponse.ok(result);
+    }
+
+    @GetMapping
+    @Operation(summary = "게시물 전체 조회")
+    public SuccessResponse<ListResult<BoardResponse>> readAll() {
+        ListResult<BoardResponse> result = boardService.findAll();
         return SuccessResponse.ok(result);
     }
 }

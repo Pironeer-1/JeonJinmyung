@@ -6,6 +6,7 @@ import com.example.week3.board.entity.Board;
 import com.example.week3.board.mapper.BoardMapper;
 import com.example.week3.board.repository.BoardRepository;
 import com.example.week3.board.repository.BoardMemoryRepository;
+import com.example.week3.global.dto.response.result.ListResult;
 import com.example.week3.global.dto.response.result.SingleResult;
 import com.example.week3.global.service.ResponseService;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +30,12 @@ public class BoardService {
 
         BoardResponse boardResponse = BoardResponse.of(board);
         return ResponseService.getSingleResult(boardResponse);
+    }
+
+    public ListResult<BoardResponse> findAll() {
+        List<Board> topics = boardRepository.findAll();
+        List<BoardResponse> list = topics.stream().map(BoardResponse::of).toList();
+        return ResponseService.getListResult(list);
     }
 
 }

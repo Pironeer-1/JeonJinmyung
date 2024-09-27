@@ -34,4 +34,9 @@ public class BoardMemoryRepositoryV2 implements BoardRepository {
         return Optional.ofNullable(boardMap.get(id));
     }
 
+    @Override
+    public List<Board> findAll() {
+        return boardMap.values().stream().toList();
+    }
+
 }
